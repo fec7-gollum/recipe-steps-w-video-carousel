@@ -15,5 +15,9 @@
   "bugs": {
     "url": "https://github.com/fec7-gollum/recipe-steps-w-video-carousel/issues"
   },
-  "homepage": "https://github.com/fec7-gollum/recipe-steps-w-video-carousel#readme"
+  "homepage": "https://github.com/fec7-gollum/recipe-steps-w-video-carousel#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1"
+  }
 }
