@@ -1,0 +1,19 @@
+{
+  "name": "recipe-steps-w-video-carousel",
+  "version": "1.0.0",
+  "description": "#",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fec7-gollum/recipe-steps-w-video-carousel.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/fec7-gollum/recipe-steps-w-video-carousel/issues"
+  },
+  "homepage": "https://github.com/fec7-gollum/recipe-steps-w-video-carousel#readme"
+}
