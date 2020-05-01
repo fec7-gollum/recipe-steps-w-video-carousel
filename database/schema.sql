@@ -14,8 +14,8 @@ CREATE TABLE steps (
   recipes_id INT NOT NULL,
   id INT NOT NULL AUTO_INCREMENT,
   number INT NOT NULL,
-  text TEXT,
-  hasVideos TINYINT(1),
+  text TEXT NOT NULL,
+  hasVideos TINYINT(1) NOT NULL,
   PRIMARY KEY (id),
   FOREIGN KEY(recipes_id)
     REFERENCES recipes(id)
@@ -24,7 +24,7 @@ CREATE TABLE steps (
 CREATE TABLE  videos (
   steps_id INT NOT NULL,
   id INT NOT NULL,
-  url VARCHAR(255),
+  url VARCHAR(255) NOT NULL,
   PRIMARY KEY (id),
   FOREIGN KEY(steps_id)
     REFERENCES steps(id)
