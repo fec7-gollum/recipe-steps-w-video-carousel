@@ -13,13 +13,13 @@ const dbQuery = (sql) => {
 
 //iife creates database structure
 (()=> {
-  let sqlString = 'DROP DATABASE IF EXISTS recipes;';
+  let sqlString = 'DROP DATABASE IF EXISTS bonappetit;';
   dbQuery(sqlString);
 
-  sqlString = 'CREATE DATABASE recipes;';
+  sqlString = 'CREATE DATABASE bonappetit;';
   dbQuery(sqlString);
 
-  sqlString = 'USE recipes;';
+  sqlString = 'USE bonappetit;';
   dbQuery(sqlString);
 
   sqlString = 'CREATE TABLE recipes (\
@@ -41,15 +41,15 @@ const dbQuery = (sql) => {
   );';
   dbQuery(sqlString);
 
-  sqlString = 'CREATE TABLE  videos (\
+  sqlString = 'CREATE TABLE videos (\
     steps_id INT NOT NULL, \
+    id INT NOT NULL AUTO_INCREMENT, \
     url VARCHAR(255) NOT NULL, \
     PRIMARY KEY (id), \
     FOREIGN KEY(steps_id) \
       REFERENCES steps(id) \
   );';
   dbQuery(sqlString);
-  console.log('Success: Database Built');
 })();
 
 var videoUrls = [
@@ -113,26 +113,24 @@ var videoUrls = [
   'https://assets.bonappetit.com/clips/5e74f54704fca90008eaf72a/720p/pass/BA_BAO_S06_Ep045_Basically_TahiniBillionairesBars_07_CUT_SERVE_.mp4.mp4'
 ];
 
-((n)=> {
+//change n for amount of recipes generated
+((n = 100)=> {
   for (var i = 1; i <= n; i++) {
-    let sqlString = `INSERT INTO recipes (name) VALUES (${faker.lorem.words(faker.random.number({ min: 1, max: 5 }))});`;
+    let sqlString = `INSERT INTO recipes (name) VALUES ('${faker.lorem.words(faker.random.number({ min: 1, max: 5 }))}');`;
     dbQuery(sqlString);
     for (var j = 1; j <= faker.random.number({ min: 5, max: 15 }); j++) {
       let hasVideos = faker.random.number(1);
       let sqlString = `INSERT INTO steps (recipes_id, number, text, hasVideos) \
-      VALUES (${i}, ${j}, ${faker.lorem.sentences(faker.random.number({ min: 2, max: 6 }))}, ${hasVideos} );`;
+      VALUES (${i}, ${j}, '${faker.lorem.sentences(faker.random.number({ min: 2, max: 6 }))}', ${hasVideos} );`;
       dbQuery(sqlString);
       if (hasVideos) {
         for (var k = 1; k <= faker.random.number({ min: 1, max: 2 }); k++) {
-          let sqlString = `INSERT INTO recipes (steps_id, url) VALUES (${j}, ${videoUrls[faker.random.number({ min: 0, max: videoUrls.length - 1})]});`;
+          let sqlString = `INSERT INTO videos (steps_id, url) VALUES (${j}, '${videoUrls[faker.random.number({ min: 0, max: videoUrls.length - 1})]}');`;
           dbQuery(sqlString);
         }
-
       }
     }
   }
-  console.log('Success: Database Seeded');
-})(100);
-//change n for amount of recipes generated
+})();
 
-process.exit();
+//I am going to add a process.exit() to make node quit once done.
