@@ -1,8 +1,6 @@
 const db = require('./index.js');
 const faker = require('faker');
 
-
-
 const dbQuery = (sql) => {
   db.con.query(sql, (err, result)=>{
     if (err) {
@@ -133,4 +131,4 @@ var videoUrls = [
   }
 })();
 
-//I am going to add a process.exit() to make node quit once done.
+//I am going to add a process.exit() to make node quit once
