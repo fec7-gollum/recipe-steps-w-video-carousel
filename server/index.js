@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
+const path = require('path');
 const port = 3003;
 const db = require('../database/index.js');
 
@@ -16,36 +17,36 @@ const dbQuery = (sql, cb) => {
   });
 };
 
-app.get('/1/steps', (req, res)=> {
-  let sqlString = 'SELECT name FROM recipes WHERE id = 1;';
-  dbQuery(sqlString, (result) => console.log(result));
-  res.end();
+app.get('/api/steps/:id', (req, res)=> {
+  id = path.basename(req.url);
+  // let recipe = {
+  //   id: number,
+  //   name: string,
+  //   steps: [
+  //     //expect multiple steps per recipe
+  //     {
+  //       recipeId: number,
+  //       id: number,
+  //       number: number,
+  //       text: string,
+  //       hasVideos: boolean
+  //     },
+  //   ],
+  //   videos: [
+  //     //expect multiple videos per recipe
+  //     {
+  //       stepId: number,
+  //       url: string
+  //     },
+  //   ]
+  // };
+  let recipe = {};
+  let sqlString = `SELECT DISTINCT recipes.name, steps.number, steps.text, steps.hasVideos, videos.url FROM recipes RIGHT JOIN steps ON recipes.id = steps.recipes_id RIGHT JOIN videos ON steps.id = videos.steps_id WHERE recipes.id = ${id} ORDER BY steps.number ASC;`;
+  dbQuery(sqlString, (result) => {
+    res.send(result);
+  });
+  // console.log(JSON.stringify(recipe));
+
 });
 
 app.listen(port, ()=> console.log(`recipe-steps listening at http://localhost:${port}`));
-
-/*
-
-const recipe = {
-  id: number,
-  name: string,
-  steps: [
-    //expect multiple steps per recipe
-    {
-      recipeId: number,
-      id: number,
-      number: number,
-      text: string,
-      hasVideos: boolean
-    },
-  ],
-  videos: [
-    //expect multiple videos per recipe
-    {
-      stepId: number,
-      url: string
-    },
-  ]
-};
-
-*/
