@@ -19,34 +19,26 @@ const dbQuery = (sql, cb) => {
 
 app.get('/api/steps/:id', (req, res)=> {
   id = path.basename(req.url);
-  // let recipe = {
-  //   id: number,
-  //   name: string,
-  //   steps: [
-  //     //expect multiple steps per recipe
-  //     {
-  //       recipeId: number,
-  //       id: number,
-  //       number: number,
-  //       text: string,
-  //       hasVideos: boolean
-  //     },
-  //   ],
-  //   videos: [
-  //     //expect multiple videos per recipe
-  //     {
-  //       stepId: number,
-  //       url: string
-  //     },
-  //   ]
-  // };
-  let recipe = {};
-  let sqlString = `SELECT DISTINCT recipes.name, steps.number, steps.text, steps.hasVideos, videos.url FROM recipes RIGHT JOIN steps ON recipes.id = steps.recipes_id RIGHT JOIN videos ON steps.id = videos.steps_id WHERE recipes.id = ${id} ORDER BY steps.number ASC;`;
+  let recipe = { id: id};
+  let sqlString =
+    `SELECT recipes.name, steps.text, steps.number, steps.id, steps.hasVideos
+      FROM steps
+      JOIN recipes
+        ON recipes.id = steps.recipes_id
+      WHERE recipes.id = ${id};`;
   dbQuery(sqlString, (result) => {
-    res.send(result);
+    recipe.name = result[0].name;
+    recipe.steps = [];
+    for (var i = 0; i < result.length; i++) {
+      recipe.steps[i] = {
+        id: result[i].id,
+        number: result[i].number,
+        text: result[i].text,
+        hasVideos: result[i].hasVideos
+      };
+    }
+    res.send(recipe);
   });
-  // console.log(JSON.stringify(recipe));
-
 });
 
 app.listen(port, ()=> console.log(`recipe-steps listening at http://localhost:${port}`));

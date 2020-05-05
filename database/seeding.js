@@ -119,7 +119,7 @@ const nonRandomRecipe = {
       hasVideos: 1
     },
     {
-      id: 19,
+      id: 9,
       number: 9,
       text: 'Step 9: Starting at edge closest to you, roll dough away from you into a tight log. Using a sharp serrated knife and long sawing motions, trim about ½" of dough from both ends and discard. Slice log crosswise into 3 sections, wiping knife clean between slices. Slice each section crosswise into 3 buns (you should have 9 buns total that are each about 1" thick). Transfer buns to prepared pan as you go. When you first place the buns in the pan, space them evenly. As they proof, the buns will start to touch (this is what you want so that when then bake they rise vertically in the oven.)',
       hasVideos: 1
