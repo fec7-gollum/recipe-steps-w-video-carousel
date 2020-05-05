@@ -285,7 +285,7 @@ const dbQuery = (sql) => {
     for (var j = 1; j <= faker.random.number({ min: 5, max: 15 }); j++) {
       let hasVideos = faker.random.number(1);
       let sqlString = `INSERT INTO steps (recipes_id, number, text, hasVideos) \
-      VALUES (${i}, ${j}, '${faker.lorem.sentences(faker.random.number({ min: 2, max: 6 }))}', ${hasVideos} );`;
+      VALUES (${i}, ${j}, '${faker.lorem.sentences(faker.random.number({ min: 10, max: 20 }))}', ${hasVideos} );`;
       dbQuery(sqlString);
       if (hasVideos) {
         for (var k = 1; k <= faker.random.number({ min: 1, max: 2 }); k++) {

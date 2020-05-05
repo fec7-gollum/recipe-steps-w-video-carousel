@@ -6,7 +6,7 @@ const port = 3003;
 const db = require('../database/index.js');
 
 app.use(bodyParser.json());
-app.use(express.static(__dirname + '/../client/dist'));
+app.use('/:id', express.static(__dirname + '/../client/dist'));
 
 const dbQuery = (sql, cb) => {
   db.con.query(sql, (err, result)=>{

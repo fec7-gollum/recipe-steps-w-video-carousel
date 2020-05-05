@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/fec7-gollum/recipe-steps-w-video-carousel#readme",
   "dependencies": {
+    "axios": "^0.19.2",
     "babel-loader": "^8.1.0",
     "body-parser": "^1.19.0",
     "express": "^4.17.1",

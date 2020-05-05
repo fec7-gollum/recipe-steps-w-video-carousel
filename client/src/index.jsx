@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import axios from 'axios';
 
 const nonRandomRecipe = {
   id: 1,
@@ -158,8 +159,21 @@ class App extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
+      url: document.URL,
+      recipeId: window.location.pathname,
       recipe: nonRandomRecipe
     }
+  }
+  componentDidMount() {
+    axios.get(`/api/steps${this.state.recipeId}`)
+    .then((res) => {
+      this.setState({
+        recipe: res.data
+      })
+    })
+    .catch((err)=>{
+      console.log(err)
+    })
   }
 
   render() {
@@ -191,9 +205,8 @@ class Steps extends React.Component {
         {this.props.step.text}
         {(this.props.step.hasVideos) &&
           <div>
-              {this.props.step.hasVideos.map((video) => {
-                return <Videos video={video} />
-              })}
+            VIDEO WILL GO HERE
+
           </div>}
       </li>
     )
