@@ -128,7 +128,7 @@ const nonRandomRecipe = {
       id: 11,
       number: 11,
       text: 'Place a rack in middle of oven; preheat to 350°. Bake buns, still covered, until puffed, pale, and mostly set, about 20 minutes. Remove foil and continue to bake until golden brown, about 15 minutes if you prefer a soft and squishy bun and up to 25 minutes for a more toasted bun. Let cool slightly.',
-      hasVideos: false
+      hasVideos: []
     },
     {
       id: 12,
@@ -208,12 +208,13 @@ class App extends React.Component {
       if (recipeWithVideos.steps[i].hasVideos) {
         let videos = this.findVideosByStepId(iStepId)
         recipeWithVideos.steps[i].hasVideos = videos
+      } else {
+        recipeWithVideos.steps[i].hasVideos = []
       }
     }
     this.setState({
       recipe: recipeWithVideos
     })
-    console.log(recipeWithVideos)
   }
 
   render() {
@@ -225,7 +226,7 @@ class App extends React.Component {
           <div id="steps-wrapper">
             <ol>
               {this.state.recipe.steps.map((step) => {
-               return <Steps step={step} /> })}
+               return <Steps text={step.text} videos={step.hasVideos}/> })}
             </ol>
           </div>
       </div>
@@ -238,14 +239,15 @@ class Steps extends React.Component {
     super(props)
   }
   render() {
+    let videos;
+    if (this.props.videos.length > 0) {
+      videos = <div>{this.props.videos.map((video) => {
+      return <Videos video={video} /> })}</div>
+    }
     return (
       <li>
-        {this.props.step.text}
-        {(this.props.step.hasVideos) &&
-          <div>
-            {/* {this.state.videos.map((video) => {
-            return <Steps video={video} /> })} */}
-          </div>}
+        {this.props.text}
+        {videos}
       </li>
     )
   }
@@ -258,10 +260,10 @@ class Videos extends React.Component {
   render() {
     return (
       <video
-        playsinline="true"
-        autoplay="true"
-        muted="true"
-        loop="true">
+        playsInline
+        autoPlay
+        muted
+        loop>
         <source
           src={this.props.video.url}
           type="video/mp4"
