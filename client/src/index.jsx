@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import axios from 'axios';
 
 const nonRandomRecipe = {
   id: 1,
@@ -127,7 +128,7 @@ const nonRandomRecipe = {
       id: 11,
       number: 11,
       text: 'Place a rack in middle of oven; preheat to 350°. Bake buns, still covered, until puffed, pale, and mostly set, about 20 minutes. Remove foil and continue to bake until golden brown, about 15 minutes if you prefer a soft and squishy bun and up to 25 minutes for a more toasted bun. Let cool slightly.',
-      hasVideos: false
+      hasVideos: []
     },
     {
       id: 12,
@@ -158,8 +159,62 @@ class App extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      recipe: nonRandomRecipe
+      url: document.URL,
+      recipeId: window.location.pathname,
+      recipe: nonRandomRecipe,
+      videos: []
     }
+  }
+  componentDidMount() {
+    axios.get(`/api/steps${this.state.recipeId}`)
+    .then((res) => {
+      this.setState({
+        recipe: res.data
+      })
+    })
+    .catch((err)=>{
+      console.log(err)
+    })
+
+    axios.get(`/api/videos${this.state.recipeId}`)
+    .then((res) => {
+      this.setState({
+        videos: res.data
+      })
+    })
+    .then(()=>{
+      this.parse()
+    })
+    .catch((err)=>{
+      console.log(err)
+    })
+  }
+
+  findVideosByStepId(stepId) {
+    let output = [];
+    let videos = this.state.videos;
+    for (var i = 0; i < videos.length; i++) {
+      if (videos[i].steps_id === stepId) {
+        output.push(videos[i])
+      }
+    }
+    return output;
+  }
+
+  parse() {
+    let recipeWithVideos = this.state.recipe
+    for (var i = 0; i < recipeWithVideos.steps.length; i++) {
+      let iStepId = recipeWithVideos.steps[i].id
+      if (recipeWithVideos.steps[i].hasVideos) {
+        let videos = this.findVideosByStepId(iStepId)
+        recipeWithVideos.steps[i].hasVideos = videos
+      } else {
+        recipeWithVideos.steps[i].hasVideos = []
+      }
+    }
+    this.setState({
+      recipe: recipeWithVideos
+    })
   }
 
   render() {
@@ -171,8 +226,7 @@ class App extends React.Component {
           <div id="steps-wrapper">
             <ol>
               {this.state.recipe.steps.map((step) => {
-               return <Steps step={step} />
-              })}
+               return <Steps text={step.text} videos={step.hasVideos}/> })}
             </ol>
           </div>
       </div>
@@ -184,17 +238,16 @@ class Steps extends React.Component {
   constructor(props) {
     super(props)
   }
-
   render() {
+    let videos;
+    if (this.props.videos.length > 0) {
+      videos = <div>{this.props.videos.map((video) => {
+      return <Videos video={video} /> })}</div>
+    }
     return (
       <li>
-        {this.props.step.text}
-        {(this.props.step.hasVideos) &&
-          <div>
-              {this.props.step.hasVideos.map((video) => {
-                return <Videos video={video} />
-              })}
-          </div>}
+        {this.props.text}
+        {videos}
       </li>
     )
   }
@@ -207,10 +260,10 @@ class Videos extends React.Component {
   render() {
     return (
       <video
-        playsinline="true"
-        autoplay="true"
-        muted="true"
-        loop="true">
+        playsInline
+        autoPlay
+        muted
+        loop>
         <source
           src={this.props.video.url}
           type="video/mp4"
