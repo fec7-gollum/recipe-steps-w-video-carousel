@@ -209,11 +209,12 @@ const nonRandomRecipe = {
   ]
 };
 
-const dbQuery = (sql) => {
+const dbQuery = (sql, cb = ()=>{}) => {
   db.con.query(sql, (err, result)=>{
     if (err) {
       console.log(`Database Seeding Error: ${sql}`, err);
     }
+    cb(result);
   });
 };
 
@@ -228,33 +229,33 @@ const dbQuery = (sql) => {
   sqlString = 'USE bonappetit;';
   dbQuery(sqlString);
 
-  sqlString = 'CREATE TABLE recipes (\
-    id INT NOT NULL AUTO_INCREMENT, \
-    name VARCHAR(255) NOT NULL, \
-    PRIMARY KEY (id)\
-    );';
+  sqlString = `CREATE TABLE recipes (
+    id INT NOT NULL AUTO_INCREMENT,
+    name VARCHAR(255) NOT NULL,
+    PRIMARY KEY (id)
+    );`;
   dbQuery(sqlString);
 
-  sqlString = 'CREATE TABLE steps (\
-    recipes_id INT NOT NULL, \
-    id INT NOT NULL AUTO_INCREMENT, \
-    number INT NOT NULL, \
-    text TEXT NOT NULL, \
-    hasVideos TINYINT(1) NOT NULL, \
-    PRIMARY KEY (id), \
-    FOREIGN KEY(recipes_id) \
-      REFERENCES recipes(id) \
-  );';
+  sqlString = `CREATE TABLE steps (
+    recipes_id INT NOT NULL,
+    id INT NOT NULL AUTO_INCREMENT,
+    number INT NOT NULL,
+    text TEXT NOT NULL,
+    hasVideos TINYINT(1) NOT NULL,
+    PRIMARY KEY (id),
+    FOREIGN KEY(recipes_id)
+      REFERENCES recipes(id)
+  );`;
   dbQuery(sqlString);
 
-  sqlString = 'CREATE TABLE videos (\
-    steps_id INT NOT NULL, \
-    id INT NOT NULL AUTO_INCREMENT, \
-    url VARCHAR(255) NOT NULL, \
-    PRIMARY KEY (id), \
-    FOREIGN KEY(steps_id) \
-      REFERENCES steps(id) \
-  );';
+  sqlString = `CREATE TABLE videos (
+    steps_id INT NOT NULL,
+    id INT NOT NULL AUTO_INCREMENT,
+    url VARCHAR(255) NOT NULL,
+    PRIMARY KEY (id),
+    FOREIGN KEY(steps_id)
+      REFERENCES steps(id)
+  );`;
   dbQuery(sqlString);
 })();
 
@@ -262,8 +263,10 @@ const dbQuery = (sql) => {
   let sqlString = `INSERT INTO recipes (name) VALUES ('${nonRandomRecipe.name}');`;
   dbQuery(sqlString);
   for (var j = 0; j < nonRandomRecipe.steps.length; j++) {
-    let sqlString = `INSERT INTO steps (recipes_id, number, text, hasVideos) \
-    VALUES (1, ${nonRandomRecipe.steps[j].number}, '${nonRandomRecipe.steps[j].text}', ${nonRandomRecipe.steps[j].hasVideos});`;
+    let sqlString =
+      `INSERT INTO steps (recipes_id, number, text, hasVideos)
+      VALUES
+        (1, ${nonRandomRecipe.steps[j].number}, '${nonRandomRecipe.steps[j].text}', ${nonRandomRecipe.steps[j].hasVideos});`;
     dbQuery(sqlString);
     if (nonRandomRecipe.steps[j].hasVideos) {
       for (var k = 0; k < nonRandomRecipe.videos.length; k++) {
@@ -288,10 +291,14 @@ const dbQuery = (sql) => {
       VALUES (${i}, ${j}, '${faker.lorem.sentences(faker.random.number({ min: 10, max: 20 }))}', ${hasVideos} );`;
       dbQuery(sqlString);
       if (hasVideos) {
-        for (var k = 1; k <= faker.random.number({ min: 1, max: 2 }); k++) {
-          let sqlString = `INSERT INTO videos (steps_id, url) VALUES (${j}, '${videoUrls[faker.random.number({ min: 0, max: videoUrls.length - 1})]}');`;
-          dbQuery(sqlString);
-        }
+        let sqlString = 'SELECT id FROM steps ORDER BY id DESC LIMIT 1;';
+        dbQuery(sqlString, (result) => {
+          let stepId = result[0].id;
+          for (var k = 1; k <= faker.random.number({ min: 1, max: 2 }); k++) {
+            let sqlString = `INSERT INTO videos (steps_id, url) VALUES (${stepId}, '${videoUrls[faker.random.number({ min: 0, max: videoUrls.length - 1})]}');`;
+            dbQuery(sqlString);
+          }
+        });
       }
     }
   }

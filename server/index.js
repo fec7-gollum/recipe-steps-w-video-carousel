@@ -36,8 +36,24 @@ app.get('/api/steps/:id', (req, res)=> {
         text: result[i].text,
         hasVideos: result[i].hasVideos
       };
+
     }
     res.send(recipe);
+  });
+});
+
+app.get('/api/videos/:id', (req, res)=> {
+  id = path.basename(req.url);
+  let sqlString =
+    `SELECT videos.steps_id, videos.id, url
+      FROM videos
+      JOIN steps
+        ON steps.id = videos.steps_id
+      JOIN recipes
+        ON recipes.id = steps.recipes_id
+      WHERE recipes.id = ${id};`;
+  dbQuery(sqlString, (result) => {
+    res.send(result);
   });
 });
 

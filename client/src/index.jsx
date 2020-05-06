@@ -161,7 +161,8 @@ class App extends React.Component {
     this.state = {
       url: document.URL,
       recipeId: window.location.pathname,
-      recipe: nonRandomRecipe
+      recipe: nonRandomRecipe,
+      videos: []
     }
   }
   componentDidMount() {
@@ -174,6 +175,45 @@ class App extends React.Component {
     .catch((err)=>{
       console.log(err)
     })
+
+    axios.get(`/api/videos${this.state.recipeId}`)
+    .then((res) => {
+      this.setState({
+        videos: res.data
+      })
+    })
+    .then(()=>{
+      this.parse()
+    })
+    .catch((err)=>{
+      console.log(err)
+    })
+  }
+
+  findVideosByStepId(stepId) {
+    let output = [];
+    let videos = this.state.videos;
+    for (var i = 0; i < videos.length; i++) {
+      if (videos[i].steps_id === stepId) {
+        output.push(videos[i])
+      }
+    }
+    return output;
+  }
+
+  parse() {
+    let recipeWithVideos = this.state.recipe
+    for (var i = 0; i < recipeWithVideos.steps.length; i++) {
+      let iStepId = recipeWithVideos.steps[i].id
+      if (recipeWithVideos.steps[i].hasVideos) {
+        let videos = this.findVideosByStepId(iStepId)
+        recipeWithVideos.steps[i].hasVideos = videos
+      }
+    }
+    this.setState({
+      recipe: recipeWithVideos
+    })
+    console.log(recipeWithVideos)
   }
 
   render() {
@@ -185,8 +225,7 @@ class App extends React.Component {
           <div id="steps-wrapper">
             <ol>
               {this.state.recipe.steps.map((step) => {
-               return <Steps step={step} />
-              })}
+               return <Steps step={step} /> })}
             </ol>
           </div>
       </div>
@@ -198,15 +237,14 @@ class Steps extends React.Component {
   constructor(props) {
     super(props)
   }
-
   render() {
     return (
       <li>
         {this.props.step.text}
         {(this.props.step.hasVideos) &&
           <div>
-            VIDEO WILL GO HERE
-
+            {/* {this.state.videos.map((video) => {
+            return <Steps video={video} /> })} */}
           </div>}
       </li>
     )
