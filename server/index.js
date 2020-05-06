@@ -57,4 +57,4 @@ app.get('/api/videos/:id', (req, res)=> {
   });
 });
 
-app.listen(port, ()=> console.log(`recipe-steps listening at http://localhost:${port}`));
+module.exports = app;
