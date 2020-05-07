@@ -1,6 +1,11 @@
+/* eslint-disable react/no-access-state-in-setstate */
+/* eslint-disable react/destructuring-assignment */
+/* eslint-disable prefer-destructuring */
+/* eslint-disable no-console */
 import React from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
+import Steps from './components/steps';
 
 const nonRandomRecipe = {
   id: 1,
@@ -14,8 +19,8 @@ const nonRandomRecipe = {
         {
           id: 1,
           url: 'https://assets.bonappetit.com/clips/5e908f11a19ab80008f8f97e/720p/pass/BA_BAO_S06_Ep048_Basically_CinnamonDateSwirlBuns_01_WARM_OIL_BUTTERMILK_.mp4.mp4',
-        }
-      ]
+        },
+      ],
     },
     {
       id: 2,
@@ -25,8 +30,8 @@ const nonRandomRecipe = {
         {
           id: 2,
           url: 'https://assets.bonappetit.com/clips/5e908f11d7d6500008c507e2/720p/pass/BA_BAO_S06_Ep048_Basically_CinnamonDateSwirlBuns_02_EGGS_YEAST_BROWN_SUGAR_.mp4.mp4',
-        }
-      ]
+        },
+      ],
     },
     {
       id: 3,
@@ -36,8 +41,8 @@ const nonRandomRecipe = {
         {
           id: 3,
           url: 'https://assets.bonappetit.com/clips/5e908f127933750008e30766/720p/pass/BA_BAO_S06_Ep048_Basically_CinnamonDateSwirlBuns_03_FLOUR_BAKING_SODA_SALT_.mp4.mp4',
-        }
-      ]
+        },
+      ],
     },
     {
       id: 4,
@@ -47,8 +52,8 @@ const nonRandomRecipe = {
         {
           id: 4,
           url: 'https://assets.bonappetit.com/clips/5e908f13c5c4bd0008e9aac8/720p/pass/BA_BAO_S06_Ep048_Basically_CinnamonDateSwirlBuns_04_SCRAPE_KNEAD_DOUGH_v2.mp4.mp4',
-        }
-      ]
+        },
+      ],
     },
     {
       id: 5,
@@ -58,8 +63,8 @@ const nonRandomRecipe = {
         {
           id: 5,
           url: 'https://assets.bonappetit.com/clips/5e908f137933750008e30768/720p/pass/BA_BAO_S06_Ep048_Basically_CinnamonDateSwirlBuns_05_FOLD_OIL_COVER_DOUGH_.mp4.mp4',
-        }
-      ]
+        },
+      ],
     },
     {
       id: 6,
@@ -73,8 +78,8 @@ const nonRandomRecipe = {
         {
           id: 7,
           url: 'https://assets.bonappetit.com/clips/5e908f152a386f0008e97205/720p/pass/BA_BAO_S06_Ep048_Basically_CinnamonDateSwirlBuns_05b_PUREE_DATES_.mp4.mp4',
-        }
-      ]
+        },
+      ],
     },
     {
       id: 7,
@@ -88,8 +93,8 @@ const nonRandomRecipe = {
         {
           id: 9,
           url: 'https://assets.bonappetit.com/clips/5e908f172fa8a600088c47ba/720p/pass/BA_BAO_S06_Ep048_Basically_CinnamonDateSwirlBuns_06b_ROLL_MEASURE_DOUGH__1.mp4.mp4',
-        }
-      ]
+        },
+      ],
     },
     {
       id: 8,
@@ -99,8 +104,8 @@ const nonRandomRecipe = {
         {
           id: 10,
           url: 'https://assets.bonappetit.com/clips/5e908f1731e3840009ad5500/720p/pass/BA_BAO_S06_Ep048_Basically_CinnamonDateSwirlBuns_06c_DOLLOP_PUREE_BROWN_SUGAR_.mp4.mp4',
-        }
-      ]
+        },
+      ],
     },
     {
       id: 9,
@@ -110,8 +115,8 @@ const nonRandomRecipe = {
         {
           id: 11,
           url: 'https://assets.bonappetit.com/clips/5e908f1731e3840009ad5501/720p/pass/BA_BAO_S06_Ep048_Basically_CinnamonDateSwirlBuns_07_ROLL_SLICE_TRANSFER__.mp4.mp4',
-        }
-      ]
+        },
+      ],
     },
     {
       id: 10,
@@ -121,14 +126,14 @@ const nonRandomRecipe = {
         {
           id: 12,
           url: 'https://assets.bonappetit.com/clips/5e908f182a386f0008e97207/720p/pass/BA_BAO_S06_Ep048_Basically_CinnamonDateSwirlBuns_09a_PROOF_v2.mp4.mp4',
-        }
-      ]
+        },
+      ],
     },
     {
       id: 11,
       number: 11,
       text: 'Place a rack in middle of oven; preheat to 350°. Bake buns, still covered, until puffed, pale, and mostly set, about 20 minutes. Remove foil and continue to bake until golden brown, about 15 minutes if you prefer a soft and squishy bun and up to 25 minutes for a more toasted bun. Let cool slightly.',
-      hasVideos: []
+      hasVideos: [],
     },
     {
       id: 12,
@@ -138,8 +143,8 @@ const nonRandomRecipe = {
         {
           id: 14,
           url: 'https://assets.bonappetit.com/clips/5e908f1ac5c4bd0008e9aaca/720p/pass/BA_BAO_S06_Ep048_Basically_CinnamonDateSwirlBuns_10a_MAKE_GLAZE_.mp4.mp4',
-        }
-      ]
+        },
+      ],
     },
     {
       id: 13,
@@ -149,72 +154,72 @@ const nonRandomRecipe = {
         {
           id: 15,
           url: 'https://assets.bonappetit.com/clips/5e908f1bed51740008882af8/720p/pass/BA_BAO_S06_Ep048_Basically_CinnamonDateSwirlBuns_10b_GLAZE_SERVE_.mp4.mp4',
-        }
-      ]
+        },
+      ],
     },
   ],
 };
 
 class App extends React.Component {
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
-      url: document.URL,
       recipeId: window.location.pathname,
       recipe: nonRandomRecipe,
-      videos: []
-    }
+      videos: [],
+    };
   }
+
   componentDidMount() {
     axios.get(`/api/steps${this.state.recipeId}`)
-    .then((res) => {
-      this.setState({
-        recipe: res.data
+      .then((res) => {
+        this.setState({
+          recipe: res.data,
+        });
       })
-    })
-    .catch((err)=>{
-      console.log(err)
-    })
+      .catch((err) => {
+        console.log(err);
+      });
 
     axios.get(`/api/videos${this.state.recipeId}`)
-    .then((res) => {
-      this.setState({
-        videos: res.data
+      .then((res) => {
+        this.setState({
+          videos: res.data,
+        });
       })
-    })
-    .then(()=>{
-      this.parse()
-    })
-    .catch((err)=>{
-      console.log(err)
-    })
+      .then(() => {
+        this.parse();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
 
   findVideosByStepId(stepId) {
-    let output = [];
-    let videos = this.state.videos;
-    for (var i = 0; i < videos.length; i++) {
+    const output = [];
+    const videos = this.state.videos;
+    for (let i = 0; i < videos.length; i += 1) {
       if (videos[i].steps_id === stepId) {
-        output.push(videos[i])
+        output.push(videos[i]);
       }
     }
     return output;
   }
 
   parse() {
-    let recipeWithVideos = this.state.recipe
-    for (var i = 0; i < recipeWithVideos.steps.length; i++) {
-      let iStepId = recipeWithVideos.steps[i].id
+    const recipeWithVideos = this.state.recipe;
+    for (let i = 0; i < recipeWithVideos.steps.length; i += 1) {
+      const iStepId = recipeWithVideos.steps[i].id;
       if (recipeWithVideos.steps[i].hasVideos) {
-        let videos = this.findVideosByStepId(iStepId)
-        recipeWithVideos.steps[i].hasVideos = videos
+        const videos = this.findVideosByStepId(iStepId);
+        recipeWithVideos.steps[i].hasVideos = videos;
       } else {
-        recipeWithVideos.steps[i].hasVideos = []
+        recipeWithVideos.steps[i].hasVideos = [];
       }
     }
     this.setState({
-      recipe: recipeWithVideos
-    })
+      recipe: recipeWithVideos,
+    });
   }
 
   render() {
@@ -223,54 +228,16 @@ class App extends React.Component {
         <h3>
           Steps
         </h3>
-          <div id="steps-wrapper">
-            <ol>
-              {this.state.recipe.steps.map((step) => {
-               return <Steps text={step.text} videos={step.hasVideos}/> })}
-            </ol>
-          </div>
+        <div id="steps-wrapper">
+          <ol>
+            {this.state.recipe.steps.map(
+              (step) => <Steps text={step.text} videos={step.hasVideos} />,
+            )}
+          </ol>
+        </div>
       </div>
-    )
+    );
   }
 }
 
-class Steps extends React.Component {
-  constructor(props) {
-    super(props)
-  }
-  render() {
-    let videos;
-    if (this.props.videos.length > 0) {
-      videos = <div>{this.props.videos.map((video) => {
-      return <Videos video={video} /> })}</div>
-    }
-    return (
-      <li>
-        {this.props.text}
-        {videos}
-      </li>
-    )
-  }
-}
-
-class Videos extends React.Component {
-  constructor(props) {
-    super(props)
-  }
-  render() {
-    return (
-      <video
-        playsInline
-        autoPlay
-        muted
-        loop>
-        <source
-          src={this.props.video.url}
-          type="video/mp4"
-
-        />
-      </video>
-    )
-  }
-}
 ReactDOM.render(<App />, document.getElementById('root'));
