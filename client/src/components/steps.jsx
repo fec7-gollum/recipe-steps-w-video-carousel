@@ -1,7 +1,8 @@
+/* eslint-disable import/extensions */
 /* eslint-disable react/destructuring-assignment */
 import React from 'react';
 import { PropTypes } from 'prop-types';
-import Videos from './videos';
+import Videos from './videos.jsx';
 
 
 function Steps(props) {

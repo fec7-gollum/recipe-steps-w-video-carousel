@@ -1,3 +1,4 @@
+/* eslint-disable import/extensions */
 /* eslint-disable react/no-access-state-in-setstate */
 /* eslint-disable react/destructuring-assignment */
 /* eslint-disable prefer-destructuring */
@@ -5,7 +6,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
-import Steps from './components/steps';
+import Steps from './components/steps.jsx';
 
 const nonRandomRecipe = {
   id: 1,
