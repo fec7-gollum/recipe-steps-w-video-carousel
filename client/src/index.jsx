@@ -225,7 +225,7 @@ class App extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="app">
         <h3>
           Steps
         </h3>
@@ -242,3 +242,5 @@ class App extends React.Component {
 }
 
 ReactDOM.render(<App />, document.getElementById('root'));
+
+export default App;

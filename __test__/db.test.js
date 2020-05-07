@@ -13,7 +13,7 @@ const dbQuery = (sql, cb = () => {}) => {
 };
 
 // database tests
-describe('Database Test', () => {
+xdescribe('Database Test', () => {
   beforeAll(async () => {
     await db.con.query('USE bonappetit;');
   });

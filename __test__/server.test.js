@@ -6,7 +6,7 @@ const app = require('../server/index.js');
 const request = supertest(app);
 
 // server tests
-describe('/api/steps/1', () => {
+xdescribe('/api/steps/1', () => {
   test('It should respond with 13 steps for id = 1', async () => {
     const response = await request.get('/api/steps/1');
     expect(response.body.steps.length).toBe(13);
@@ -27,7 +27,7 @@ describe('/api/steps/1', () => {
   });
 });
 
-describe('/api/videos/1', () => {
+xdescribe('/api/videos/1', () => {
   test('It should respond with 14 videos for id = 1', async () => {
     const response = await request.get('/api/videos/1');
     expect(response.body.length).toBe(14);
