@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
@@ -17,7 +18,7 @@ const dbQuery = (sql, cb) => {
   });
 };
 
-app.get('/api/steps/:id', (req, res)=> {
+app.get('/api/steps/:id', (req, res) => {
   const id = path.basename(req.url);
   const recipe = {};
   recipe.id = id;
@@ -42,7 +43,7 @@ app.get('/api/steps/:id', (req, res)=> {
   });
 });
 
-app.get('/api/videos/:id', (req, res)=> {
+app.get('/api/videos/:id', (req, res) => {
   const id = path.basename(req.url);
   const sqlString = `SELECT videos.steps_id, videos.id, url
                         FROM videos
