@@ -9,13 +9,13 @@ function Steps(props) {
   let videos;
   if (props.videos.length > 0) {
     videos = (
-      <div>
+      <div className="videos-wrapper">
         {props.videos.map((video) => <Videos video={video} />)}
       </div>
     );
   }
   return (
-    <li>
+    <li className="steps-list-item">
       {props.text}
       {videos}
     </li>

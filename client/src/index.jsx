@@ -230,7 +230,7 @@ class App extends React.Component {
           Steps
         </h3>
         <div id="steps-wrapper">
-          <ol>
+          <ol id="steps-ol">
             {this.state.recipe.steps.map(
               (step) => <Steps text={step.text} videos={step.hasVideos} />,
             )}
