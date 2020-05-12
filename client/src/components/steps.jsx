@@ -4,7 +4,6 @@ import React from 'react';
 import { PropTypes } from 'prop-types';
 import Videos from './videos.jsx';
 
-
 const Steps = ({
   hidden, number, text, videos,
 }) => {
@@ -49,7 +48,6 @@ const Steps = ({
     </div>
   );
 };
-
 
 Steps.propTypes = {
   hidden: PropTypes.bool.isRequired,
