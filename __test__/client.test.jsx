@@ -7,7 +7,7 @@ import App from '../client/src/index.jsx';
 import Steps from '../client/src/components/steps.jsx';
 import Videos from '../client/src/components/videos.jsx';
 
-describe('Client Testing: App', () => {
+xdescribe('Client Testing: App', () => {
   it('renders the inner Counter', () => {
     const wrapper = mount(<App />);
 

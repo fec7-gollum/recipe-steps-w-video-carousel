@@ -42,6 +42,14 @@ body {
   word-wrap: break-word;
 }
 
+.hidden {
+  visibility: hidden;
+}
+
+ul {
+  list-style: none;
+}
+
  /*
 div #steps-wrapper
 ol  #steps-ol

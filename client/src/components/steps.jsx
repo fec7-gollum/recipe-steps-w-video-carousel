@@ -34,10 +34,16 @@ function Steps(props) {
     );
   }
   return (
-    <li className="steps-list-item">
-      {props.text}
-      {videos}
-    </li>
+    <div>
+      <p>
+        {props.number}
+        .
+      </p>
+      <li className="steps-list-item">
+        {props.text}
+        {videos}
+      </li>
+    </div>
   );
 }
 

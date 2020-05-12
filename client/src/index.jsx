@@ -244,17 +244,17 @@ class App extends React.Component {
           </div>
         </div>
         <div id="steps-wrapper">
-          <ol id="steps-ol">
+          <ul id="steps-ol">
             {this.state.recipe.steps.map(
-              (step) => <Steps text={step.text} videos={step.hasVideos} hidden={this.state.hidden} />,
+              (step) => <Steps text={step.text} videos={step.hasVideos} hidden={this.state.hidden} number={step.number} />,
             )}
-          </ol>
+          </ul>
         </div>
       </div>
     );
   }
 }
 
-ReactDOM.render(<App />, document.getElementById('root'));
+ReactDOM.render(<App />, document.getElementById('root') || document.createElement('div'));
 
 export default App;
