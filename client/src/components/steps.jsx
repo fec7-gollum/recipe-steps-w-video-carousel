@@ -7,7 +7,9 @@ import Videos from './videos.jsx';
 
 function Steps(props) {
   let videos;
-  if (props.videos.length === 1) {
+  if (props.hidden) {
+    videos = false;
+  } else if (props.videos.length === 1) {
     videos = (
       <div className="videos-wrapper">
         {props.videos.map((video) => <Videos video={video} />)}
@@ -17,7 +19,7 @@ function Steps(props) {
     videos = (
       <div className="videos-wrapper">
         <div className="carousel-wrapper">
-          {props.videos.map((video, index) => <Videos num={index} video={video} />)}
+          {props.videos.map((video) => <Videos video={video} />)}
           <div className="carousel-controls">
             <button type="button">Previous</button>
             <button type="button">Next</button>
@@ -46,6 +48,7 @@ Steps.propTypes = {
     url: PropTypes.string.isRequired,
   })).isRequired,
   text: PropTypes.string.isRequired,
+  hidden: PropTypes.bool.isRequired,
 };
 
 export default Steps;

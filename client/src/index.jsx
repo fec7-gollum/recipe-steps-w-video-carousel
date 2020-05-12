@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable import/extensions */
 /* eslint-disable react/no-access-state-in-setstate */
 /* eslint-disable react/destructuring-assignment */
@@ -168,7 +169,9 @@ class App extends React.Component {
       recipeId: window.location.pathname,
       recipe: nonRandomRecipe,
       videos: [],
+      hidden: false,
     };
+    this.toggleHidden = this.toggleHidden.bind(this);
   }
 
   componentDidMount() {
@@ -223,6 +226,12 @@ class App extends React.Component {
     });
   }
 
+  toggleHidden() {
+    this.setState({
+      hidden: !this.state.hidden,
+    });
+  }
+
   render() {
     return (
       <div className="app">
@@ -230,14 +239,14 @@ class App extends React.Component {
           <h3 id="steps-title">
             Steps
           </h3>
-          <div id-="steps-hide-button">
+          <div id="steps-hide-button" onClick={this.toggleHidden}>
             Hide All Images
           </div>
         </div>
         <div id="steps-wrapper">
           <ol id="steps-ol">
             {this.state.recipe.steps.map(
-              (step) => <Steps text={step.text} videos={step.hasVideos} />,
+              (step) => <Steps text={step.text} videos={step.hasVideos} hidden={this.state.hidden} />,
             )}
           </ol>
         </div>
