@@ -3,17 +3,19 @@ import { PropTypes } from 'prop-types';
 
 function Videos({ video }) {
   return (
-    <video
-      playsInline
-      autoPlay
-      muted
-      loop
-    >
-      <source
-        src={video.url}
-        type="video/mp4"
-      />
-    </video>
+    <div className="carousel-component">
+      <video
+        playsInline
+        autoPlay
+        muted
+        loop
+      >
+        <source
+          src={video.url}
+          type="video/mp4"
+        />
+      </video>
+    </div>
   );
 }
 

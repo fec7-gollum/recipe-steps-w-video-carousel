@@ -1,12 +1,50 @@
 body {
-  font-family: Graphik Web,Helvetica Neue,Helvetica,Roboto,Arial,sans-serif;
-  font-weight: 300;
-  font-size: 1.4rem;
+  font: 12pt Helvetica, Arial, Sans-Serif !important;
+  line-height: 1.3;
+}
+
+ .app {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+#steps-wrapper {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-column: 2 / 5;
+  width: 100%;
+  height: 100%;
+  /* overflow: hidden; */
+}
+
+#steps-header {
+  display: grid;
+  grid-template-columns: 50% 50%;
+  grid-column: 2 / 5;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+#steps-title {
+  grid-column: 1 / 2;
+}
+
+#steps-hide-button {
+  grid-column: 2 / 3;
+}
+
+.steps-list-item{
+  border-bottom: 5px solid black;
+  word-wrap: break-word;
 }
 
 /*
-div .app
-div #steps-rwapper
+
+div #steps-wrapper
 ol  #steps-ol
 li .steps-list-item
 

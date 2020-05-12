@@ -226,9 +226,14 @@ class App extends React.Component {
   render() {
     return (
       <div className="app">
-        <h3>
-          Steps
-        </h3>
+        <div id="steps-header">
+          <h3 id="steps-title">
+            Steps
+          </h3>
+          <div id-="steps-hide-button">
+            Hide All Images
+          </div>
+        </div>
         <div id="steps-wrapper">
           <ol id="steps-ol">
             {this.state.recipe.steps.map(
