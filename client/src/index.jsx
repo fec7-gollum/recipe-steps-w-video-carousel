@@ -1,9 +1,6 @@
-/* eslint-disable jsx-a11y/no-static-element-interactions */
-/* eslint-disable import/extensions */
-/* eslint-disable react/no-access-state-in-setstate */
-/* eslint-disable react/destructuring-assignment */
-/* eslint-disable prefer-destructuring */
 /* eslint-disable no-console */
+/* eslint-disable import/extensions */
+
 import React from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
@@ -174,8 +171,10 @@ class App extends React.Component {
     this.toggleHidden = this.toggleHidden.bind(this);
   }
 
+
   componentDidMount() {
-    axios.get(`/api/steps${this.state.recipeId}`)
+    const { recipeId } = this.state;
+    axios.get(`/api/steps${recipeId}`)
       .then((res) => {
         this.setState({
           recipe: res.data,
@@ -185,7 +184,7 @@ class App extends React.Component {
         console.log(err);
       });
 
-    axios.get(`/api/videos${this.state.recipeId}`)
+    axios.get(`/api/videos${recipeId}`)
       .then((res) => {
         this.setState({
           videos: res.data,
@@ -201,7 +200,7 @@ class App extends React.Component {
 
   findVideosByStepId(stepId) {
     const output = [];
-    const videos = this.state.videos;
+    const { videos } = this.state;
     for (let i = 0; i < videos.length; i += 1) {
       if (videos[i].steps_id === stepId) {
         output.push(videos[i]);
@@ -211,28 +210,32 @@ class App extends React.Component {
   }
 
   parse() {
-    const recipeWithVideos = this.state.recipe;
-    for (let i = 0; i < recipeWithVideos.steps.length; i += 1) {
-      const iStepId = recipeWithVideos.steps[i].id;
-      if (recipeWithVideos.steps[i].hasVideos) {
+    const { recipe } = this.state;
+    for (let i = 0; i < recipe.steps.length; i += 1) {
+      const iStepId = recipe.steps[i].id;
+      if (recipe.steps[i].hasVideos) {
         const videos = this.findVideosByStepId(iStepId);
-        recipeWithVideos.steps[i].hasVideos = videos;
+        recipe.steps[i].hasVideos = videos;
       } else {
-        recipeWithVideos.steps[i].hasVideos = [];
+        recipe.steps[i].hasVideos = [];
       }
     }
     this.setState({
-      recipe: recipeWithVideos,
+      recipe,
     });
   }
 
   toggleHidden() {
+    const { hidden } = this.state;
     this.setState({
-      hidden: !this.state.hidden,
+      hidden: !hidden,
     });
   }
 
   render() {
+    const {
+      recipe, hidden
+    } = this.state;
     return (
       <div className="app">
         <div id="steps-header">
@@ -245,8 +248,8 @@ class App extends React.Component {
         </div>
         <div id="steps-wrapper">
           <ul id="steps-ol">
-            {this.state.recipe.steps.map(
-              (step) => <Steps text={step.text} videos={step.hasVideos} hidden={this.state.hidden} number={step.number} />,
+            {recipe.steps.map(
+              (step) => <Steps text={step.text} videos={step.hasVideos} hidden={hidden} number={step.number} />,
             )}
           </ul>
         </div>

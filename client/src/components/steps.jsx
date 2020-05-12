@@ -1,25 +1,28 @@
 /* eslint-disable import/extensions */
-/* eslint-disable react/destructuring-assignment */
+
 import React from 'react';
 import { PropTypes } from 'prop-types';
 import Videos from './videos.jsx';
 
 
-function Steps(props) {
-  let videos;
-  if (props.hidden) {
-    videos = false;
-  } else if (props.videos.length === 1) {
-    videos = (
+const Steps = ({
+  hidden, number, text, videos,
+}) => {
+  let vids;
+
+  if (hidden) {
+    vids = false;
+  } else if (videos.length === 1) {
+    vids = (
       <div className="videos-wrapper">
-        {props.videos.map((video) => <Videos video={video} />)}
+        {videos.map((video) => <Videos video={video} />)}
       </div>
     );
-  } else if (props.videos.length === 2) {
-    videos = (
+  } else if (videos.length === 2) {
+    vids = (
       <div className="videos-wrapper">
         <div className="carousel-wrapper">
-          {props.videos.map((video) => <Videos video={video} />)}
+          {videos.map((video) => <Videos video={video} />)}
           <div className="carousel-controls">
             <button type="button">Previous</button>
             <button type="button">Next</button>
@@ -36,25 +39,27 @@ function Steps(props) {
   return (
     <div>
       <p>
-        {props.number}
+        {number}
         .
       </p>
       <li className="steps-list-item">
-        {props.text}
-        {videos}
+        {text}
+        {vids}
       </li>
     </div>
   );
-}
+};
+
 
 Steps.propTypes = {
+  hidden: PropTypes.bool.isRequired,
+  number: PropTypes.number.isRequired,
+  text: PropTypes.string.isRequired,
   videos: PropTypes.arrayOf(PropTypes.shape({
     steps_id: PropTypes.number.isRequired,
     id: PropTypes.number.isRequired,
     url: PropTypes.string.isRequired,
   })).isRequired,
-  text: PropTypes.string.isRequired,
-  hidden: PropTypes.bool.isRequired,
 };
 
 export default Steps;
