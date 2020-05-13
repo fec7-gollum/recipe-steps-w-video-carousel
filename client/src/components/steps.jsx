@@ -7,35 +7,9 @@ import Videos from './videos.jsx';
 const Steps = ({
   hidden, number, text, videos,
 }) => {
-  let vids;
-
   if (hidden) {
-    vids = false;
-  } else if (videos.length === 1) {
-    vids = (
-      <div className="videos-wrapper">
-        {videos.map((video) => <Videos video={video} />)}
-      </div>
-    );
-  } else if (videos.length === 2) {
-    vids = (
-      <div className="videos-wrapper">
-        <div className="carousel-wrapper">
-          {videos.map((video) => <Videos video={video} />)}
-          <div className="carousel-controls">
-            <button type="button">Previous</button>
-            <button type="button">Next</button>
-          </div>
-          <ol className="carousel-indicators-list">
-            <li className="carousel-indicators" />
-            <li className="carousel-indicators" />
-          </ol>
-        </div>
-      </div>
-
-    );
-  }
-  return (
+    return null;
+  } return (
     <div>
       <p>
         {number}
@@ -43,7 +17,28 @@ const Steps = ({
       </p>
       <li className="steps-list-item">
         {text}
-        {vids}
+        {videos.length === 1
+        && (
+        <div className="videos-wrapper">
+            {videos.map((video) => <Videos video={video} />)}
+        </div>
+        )}
+        {videos.length === 2
+        && (
+          <div className="videos-wrapper">
+            <div className="carousel-wrapper">
+              {videos.map((video) => <Videos video={video} />)}
+              <div className="carousel-controls">
+                <button type="button">Previous</button>
+                <button type="button">Next</button>
+              </div>
+              <ol className="carousel-indicators-list">
+                <li className="carousel-indicators" />
+                <li className="carousel-indicators" />
+              </ol>
+            </div>
+          </div>
+        )}
       </li>
     </div>
   );

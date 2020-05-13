@@ -240,15 +240,20 @@ class App extends React.Component {
           <h3 id="steps-title">
             Steps
           </h3>
-          <div id="steps-hide-button" role="button" onClick={this.toggleHidden}>
+          <button id="steps-hide-button" onClick={this.toggleHidden} type="button">
             Hide All Images
-          </div>
+          </button>
         </div>
         <div id="steps-wrapper">
           <ul id="steps-ol">
-            {recipe.steps.map(
-              (step) => <Steps text={step.text} videos={step.hasVideos} hidden={hidden} number={step.number} />,
-            )}
+            {recipe.steps.map((step) => (
+              <Steps
+                text={step.text}
+                videos={step.hasVideos}
+                hidden={hidden}
+                number={step.number}
+              />
+            ))}
           </ul>
         </div>
       </div>
