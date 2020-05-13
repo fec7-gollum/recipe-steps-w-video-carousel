@@ -6,43 +6,42 @@ import Videos from './videos.jsx';
 
 const Steps = ({
   hidden, number, text, videos,
-}) => {
-  if (hidden) {
-    return null;
-  } return (
-    <div>
-      <p>
-        {number}
-        .
-      </p>
-      <li className="steps-list-item">
-        {text}
-        {videos.length === 1
-        && (
+}) => (
+  <div>
+    <p>
+      {number}
+      .
+    </p>
+    <li className="steps-list-item">
+      {text}
+      {videos.length === 1
+      && !hidden
+      && (
+      <div className="videos-wrapper">
+          {videos.map((video) => <Videos video={video} />)}
+      </div>
+      )}
+      {videos.length === 2
+      && !hidden
+      && (
         <div className="videos-wrapper">
+          <div className="carousel-wrapper">
             {videos.map((video) => <Videos video={video} />)}
-        </div>
-        )}
-        {videos.length === 2
-        && (
-          <div className="videos-wrapper">
-            <div className="carousel-wrapper">
-              {videos.map((video) => <Videos video={video} />)}
-              <div className="carousel-controls">
-                <button type="button">Previous</button>
-                <button type="button">Next</button>
-              </div>
-              <ol className="carousel-indicators-list">
-                <li className="carousel-indicators" />
-                <li className="carousel-indicators" />
-              </ol>
+            <div className="carousel-controls">
+              <button type="button">Previous</button>
+              <button type="button">Next</button>
             </div>
+            <ol className="carousel-indicators-list">
+              <li className="carousel-indicators" />
+              <li className="carousel-indicators" />
+            </ol>
           </div>
-        )}
-      </li>
-    </div>
-  );
-};
+        </div>
+      )}
+    </li>
+  </div>
+);
+
 
 Steps.propTypes = {
   hidden: PropTypes.bool.isRequired,
