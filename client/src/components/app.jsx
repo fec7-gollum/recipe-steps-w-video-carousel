@@ -3,7 +3,7 @@
 
 import React from 'react';
 import axios from 'axios';
-import Steps from './steps';
+import Steps from './steps.jsx';
 
 const nonRandomRecipe = {
   id: 1,
@@ -170,7 +170,6 @@ class App extends React.Component {
     this.toggleHidden = this.toggleHidden.bind(this);
   }
 
-
   componentDidMount() {
     const { recipeId } = this.state;
     axios.get(`/api/steps${recipeId}`)
@@ -233,7 +232,7 @@ class App extends React.Component {
 
   render() {
     const {
-      recipe, hidden
+      recipe, hidden,
     } = this.state;
     return (
       <div className="app">
@@ -241,7 +240,7 @@ class App extends React.Component {
           <h3 id="steps-title">
             Steps
           </h3>
-          <div id="steps-hide-button" onClick={this.toggleHidden}>
+          <div id="steps-hide-button" role="button" onClick={this.toggleHidden}>
             Hide All Images
           </div>
         </div>
