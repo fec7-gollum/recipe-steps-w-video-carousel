@@ -48,13 +48,13 @@ ul {
 #steps-hide-button {
   background: none!important;
   border: none;
-  padding: 0!important;
+  padding: 0 !important;
   text-decoration: underline;
   cursor: pointer;
 }
 
 button:focus {
-  outline:0;
+  outline: 0;
 }
 
 .video-wrapper {
@@ -62,17 +62,38 @@ button:focus {
 }
 
 video {
+  z-index: 2;
   width: 36.5vw;
   object-fit: contain;
 }
 
 .carousel-wrapper{
+  position: relative;
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
 }
 
 .carousel-componet {
+  z-index: -1;
   width: 200%;
+  height: 100%;
+  margin-left: -15vw !important;
+}
+
+.carousel-cover-right {
+  z-index: 10;
+  background-color: red;
+  width: 36.5vw;
+  height: 100%;
+  margin-left: -36.5vw;
+}
+
+.carousel-cover-left {
+  z-index: 10;
+  background-color: blue;
+  width: 36.5vw;
+  height: 100%;
+  margin-left: -36.5vw;
 }
  /*
 div #steps-wrapper
