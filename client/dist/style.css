@@ -1,12 +1,9 @@
-body {
-  font: 12pt Helvetica, Arial, Sans-Serif !important;
-  line-height: 1.3;
-  letter-spacing: 1px;
-}
-
- .app {
+.app {
   margin: 5vh 40vw 5vh 20vw;
   width: 40vw;
+  font-family: Graphik Web, Helvetica Neue, Helvetica, Roboto, Arial, Sans-Serif !important;
+  line-height: 1.3;
+  letter-spacing: 1px;
 }
 
 #steps-wrapper {
@@ -67,6 +64,15 @@ button:focus {
 video {
   width: 36.5vw;
   object-fit: contain;
+}
+
+.carousel-wrapper{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.carousel-componet {
+  width: 200%;
 }
  /*
 div #steps-wrapper

@@ -7,13 +7,9 @@ import Videos from './videos.jsx';
 const Steps = ({
   hidden, number, text, videos,
 }) => {
-  const onClickNext = (id) => {
-    // document.getElementById(id).classList.add('active');
-    // // classList.remove("active");
-  };
-  const onClickPrev = (id) => {
-    // element.classList.add("active");
-    // classList.remove("active");
+  const onClick = () => {
+    // const x = document.getElementsByClass(`carousel-component ${number}`);
+
   };
 
   return (
@@ -40,15 +36,16 @@ const Steps = ({
           <div className="videos-wrapper">
             <div className="carousel-wrapper">
               {videos.map((video) => <Videos video={video} stepNum={number} />)}
-              <div className="carousel-controls">
-                <button type="button" onClick={onClickNext}>Previous</button>
-                <button type="button" onClick={onClickPrev}>Next</button>
-              </div>
-              <ol className="carousel-indicators-list">
-                <li className="carousel-indicators" />
-                <li className="carousel-indicators" />
-              </ol>
+
             </div>
+            <div className="controls-wrapper">
+              <button type="button" onClick={onClick()}>Previous</button>
+              <button type="button" onClick={onClick()}>Next</button>
+            </div>
+            <ol className="control-indicators-list">
+              <li className="control-indicators" />
+              <li className="control-indicators" />
+            </ol>
           </div>
         )}
       </li>

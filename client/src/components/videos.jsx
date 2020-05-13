@@ -4,10 +4,11 @@ import { PropTypes } from 'prop-types';
 const Videos = ({
   stepNum, video,
 }) => {
-  const classNameWithNumber = `carousel-component ${stepNum}`;
+  const classNameWithNumber = `video ${stepNum}`;
   return (
-    <div className={classNameWithNumber}>
+    <div className="carousel-component">
       <video
+        className={classNameWithNumber}
         playsInline
         autoPlay
         muted
