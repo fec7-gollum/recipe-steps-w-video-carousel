@@ -1,34 +1,68 @@
 /* eslint-disable import/extensions */
-/* eslint-disable react/destructuring-assignment */
+
 import React from 'react';
 import { PropTypes } from 'prop-types';
 import Videos from './videos.jsx';
 
+const Steps = ({
+  hidden, number, text, videos,
+}) => {
+  const onClick = () => {
+    // const x = document.getElementsByClass(`carousel-component ${number}`);
 
-function Steps(props) {
-  let videos;
-  if (props.videos.length > 0) {
-    videos = (
-      <div>
-        {props.videos.map((video) => <Videos video={video} />)}
-      </div>
-    );
-  }
+  };
+
   return (
-    <li>
-      {props.text}
-      {videos}
-    </li>
+    <div className="steps-individual-wrapper">
+      <p className="steps-list-number">
+        {number}
+        .
+      </p>
+      <li className="steps-list-item">
+        <p className="steps-list-text">
+          {text}
+        </p>
+
+        {videos.length === 1
+        && !hidden
+        && (
+        <div className="videos-wrapper">
+            {videos.map((video) => <Videos video={video} />)}
+        </div>
+        )}
+        {videos.length === 2
+        && !hidden
+        && (
+          <div className="videos-wrapper">
+            <div className="carousel-wrapper">
+              <div className="carousel-cover-left" />
+              {videos.map((video) => <Videos video={video} stepNum={number} />)}
+              <div className="carousel-cover-right" />
+            </div>
+            <div className="controls-wrapper">
+              <button type="button" onClick={onClick()}>Previous</button>
+              <button type="button" onClick={onClick()}>Next</button>
+            </div>
+            <ol className="control-indicators-list">
+              <li className="control-indicators" />
+              <li className="control-indicators" />
+            </ol>
+          </div>
+        )}
+      </li>
+    </div>
   );
-}
+};
 
 Steps.propTypes = {
+  hidden: PropTypes.bool.isRequired,
+  number: PropTypes.number.isRequired,
+  text: PropTypes.string.isRequired,
   videos: PropTypes.arrayOf(PropTypes.shape({
     steps_id: PropTypes.number.isRequired,
     id: PropTypes.number.isRequired,
     url: PropTypes.string.isRequired,
   })).isRequired,
-  text: PropTypes.string.isRequired,
 };
 
 export default Steps;

@@ -1,0 +1,105 @@
+.app {
+  margin: 5vh 40vw 5vh 20vw;
+  width: 40vw;
+  font-family: Graphik Web, Helvetica Neue, Helvetica, Roboto, Arial, Sans-Serif !important;
+  line-height: 1.3;
+  letter-spacing: 1px;
+}
+
+#steps-wrapper {
+}
+
+#steps-header {
+  display: flex;
+  justify-content: space-between;
+}
+
+#steps-title {
+  margin-left: 3vw;
+}
+
+#steps-hide-button {
+
+}
+
+.steps-list-number {
+  font-size: 3em;
+  margin: 0px;
+  padding: 0px;
+}
+.steps-individual-wrapper{
+  padding-bottom: 2vh;
+  margin-bottom: 1.5vh;
+  border-bottom: 5px solid black;
+}
+.steps-list-item {
+
+  word-wrap: break-word;
+}
+
+.hidden {
+  visibility: hidden;
+}
+
+ul {
+  list-style: none;
+}
+
+#steps-hide-button {
+  background: none!important;
+  border: none;
+  padding: 0 !important;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+button:focus {
+  outline: 0;
+}
+
+.video-wrapper {
+  overflow: hidden;
+}
+
+video {
+  z-index: 2;
+  width: 36.5vw;
+  object-fit: contain;
+}
+
+.carousel-wrapper{
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+
+.carousel-componet {
+  z-index: -1;
+  width: 200%;
+  height: 100%;
+  margin-left: -15vw !important;
+}
+
+.carousel-cover-right {
+  z-index: 10;
+  background-color: red;
+  width: 36.5vw;
+  height: 100%;
+  margin-left: -36.5vw;
+}
+
+.carousel-cover-left {
+  z-index: 10;
+  background-color: blue;
+  width: 36.5vw;
+  height: 100%;
+  margin-left: -36.5vw;
+}
+ /*
+div #steps-wrapper
+ol  #steps-ol
+li .steps-list-item
+
+div .videos-wrapper
+
+*/

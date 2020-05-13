@@ -1,23 +1,31 @@
 import React from 'react';
 import { PropTypes } from 'prop-types';
 
-function Videos({ video }) {
+const Videos = ({
+  stepNum, video,
+}) => {
+  const classNameWithNumber = `video ${stepNum}`;
   return (
-    <video
-      playsInline
-      autoPlay
-      muted
-      loop
-    >
-      <source
-        src={video.url}
-        type="video/mp4"
-      />
-    </video>
+    <div className="carousel-component">
+      <video
+        className={classNameWithNumber}
+        playsInline
+        autoPlay
+        muted
+        loop
+      >
+        <source
+          className="video-source"
+          src={video.url}
+          type="video/mp4"
+        />
+      </video>
+    </div>
   );
-}
+};
 
 Videos.propTypes = {
+  stepNum: PropTypes.number.isRequired,
   video: PropTypes.shape({
     steps_id: PropTypes.number.isRequired,
     id: PropTypes.number.isRequired,
