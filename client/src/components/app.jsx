@@ -6,9 +6,10 @@ import axios from 'axios';
 import styled from 'styled-components';
 import Steps from './steps.jsx';
 
+
 const AppWrap = styled.div`
-  margin: 5vh 40vw 5vh 20vw;
-  width: 40vw;
+  margin: 5vh 35vw 5vh 5vw;
+  width: 60vw;
   font-family: Graphik Web, Helvetica Neue, Helvetica, Roboto, Arial, Sans-Serif !important;
   line-height: 1.3;
   letter-spacing: 1px;
@@ -211,7 +212,7 @@ class App extends React.Component {
 
   componentDidMount() {
     const { recipeId } = this.state;
-    axios.get(`/api/steps${recipeId}`)
+    axios.get(`http://localhost:3003/api/steps${recipeId}`)
       .then((res) => {
         this.setState({
           recipe: res.data,
@@ -221,7 +222,7 @@ class App extends React.Component {
         console.log(err);
       });
 
-    axios.get(`/api/videos${recipeId}`)
+    axios.get(`http://localhost:3003/api/videos${recipeId}`)
       .then((res) => {
         this.setState({
           videos: res.data,
