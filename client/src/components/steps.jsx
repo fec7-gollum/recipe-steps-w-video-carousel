@@ -36,17 +36,19 @@ const Steps = ({
           <div className="videos-wrapper">
             <div className="carousel-wrapper">
               <div className="carousel-cover-left" />
-              {videos.map((video) => <Videos video={video} stepNum={number} />)}
+              <div className="slide">
+                {videos.map((video) => <Videos video={video} stepNum={number} />)}
+              </div>
               <div className="carousel-cover-right" />
             </div>
             <div className="controls-wrapper">
               <button type="button" onClick={onClick()}>Previous</button>
               <button type="button" onClick={onClick()}>Next</button>
+              {/* <ol className="control-indicators-list">
+                <li className="control-indicators" />
+                <li className="control-indicators" />
+              </ol> */}
             </div>
-            <ol className="control-indicators-list">
-              <li className="control-indicators" />
-              <li className="control-indicators" />
-            </ol>
           </div>
         )}
       </li>

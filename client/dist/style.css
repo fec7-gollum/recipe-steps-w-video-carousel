@@ -73,11 +73,11 @@ video {
   grid-template-columns: 1fr 1fr 1fr 1fr;
 }
 
-.carousel-componet {
+.carousel-component {
   z-index: -1;
   width: 200%;
   height: 100%;
-  margin-left: -15vw !important;
+  transform: translateX(-36.5vw);
 }
 
 .carousel-cover-right {
@@ -96,6 +96,30 @@ video {
   width: 36.5vw;
   height: 100%;
   margin-left: -36.5vw;
+}
+
+.slide-to-the-left {
+  animation-name: slideleft;
+  animation-duration: 1s;
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
+}
+
+@keyframes slideleft {
+  100%{margin-left: -36.5vw;}
+
+}
+
+.slide-to-the-right {
+  animation-name: slideleft;
+  animation-duration: 1s;
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
+}
+
+@keyframes slideleft {
+  100%{margin-left: -36.5vw;}
+
 }
  /*
 div #steps-wrapper
