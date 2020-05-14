@@ -2,7 +2,45 @@
 
 import React from 'react';
 import { PropTypes } from 'prop-types';
+import styled from 'styled-components';
 import Videos from './videos.jsx';
+
+
+const StepsIndividualWrapper = styled.div`
+  padding-bottom: 2vh;
+  margin-bottom: 1.5vh;
+  border-bottom: 5px solid black;
+`;
+
+const StepsListNumber = styled.p`
+  font-size: 3em;
+  margin: 0px;
+  padding: 0px;
+`;
+
+const StepsListItem = styled.li`
+  word-wrap: break-word;
+`;
+const StepsListText = styled.p`
+`;
+
+const VideoWrapper = styled.div`
+  overflow: hidden;
+`;
+
+const CarouselWrapper = styled.div`
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+`;
+
+const CarouselCover = styled.div`
+  z-index: 10;
+  background-color:white;
+  width: 36.5vw;
+  height: 100%;
+  margin-left: -36.5vw;
+`;
 
 const Steps = ({
   hidden, number, text, videos,
@@ -24,32 +62,32 @@ const Steps = ({
   };
 
   return (
-    <div className="steps-individual-wrapper">
-      <p className="steps-list-number">
+    <StepsIndividualWrapper>
+      <StepsListNumber>
         {number}
         .
-      </p>
-      <li className="steps-list-item">
-        <p className="steps-list-text">
+      </StepsListNumber>
+      <StepsListItem>
+        <StepsListText>
           {text}
-        </p>
+        </StepsListText>
 
         {videos.length === 1
         && !hidden
         && (
-        <div className="videos-wrapper">
+        <VideoWrapper>
             {videos.map((video) => <Videos video={video} />)}
-        </div>
+        </VideoWrapper>
         )}
         {videos.length === 2
         && !hidden
         && (
-          <div className="videos-wrapper">
-            <div className="carousel-wrapper">
-              <div className="carousel-cover-left" />
+          <VideoWrapper>
+            <CarouselWrapper>
+              <CarouselCover />
               {videos.map((video) => <Videos video={video} stepNum={number} />)}
-              <div className="carousel-cover-right" />
-            </div>
+              <CarouselCover />
+            </CarouselWrapper>
             <div className="controls-wrapper">
               <button type="button" className="button-prev" onClick={onClickPrev}>Previous</button>
               <button type="button" className="button-next" onClick={onClickNext}>Next</button>
@@ -58,10 +96,10 @@ const Steps = ({
                 <li className="control-indicators" />
               </ol> */}
             </div>
-          </div>
+          </VideoWrapper>
         )}
-      </li>
-    </div>
+      </StepsListItem>
+    </StepsIndividualWrapper>
   );
 };
 
