@@ -5,103 +5,104 @@ import { PropTypes } from 'prop-types';
 import styled from 'styled-components';
 import Videos from './videos.jsx';
 
-
 const StepsIndividualWrapper = styled.div`
   padding-bottom: 2vh;
   margin-bottom: 1.5vh;
   border-bottom: 5px solid black;
 `;
-
 const StepsListNumber = styled.p`
   font-size: 3em;
   margin: 0px;
   padding: 0px;
 `;
-
 const StepsListItem = styled.li`
   word-wrap: break-word;
 `;
 const StepsListText = styled.p`
 `;
-
 const VideoWrapper = styled.div`
   overflow: hidden;
 `;
-
 const CarouselWrapper = styled.div`
   position: relative;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
 `;
-
 const CarouselCover = styled.div`
   z-index: 10;
   background-color:white;
-  width: 36.5vw;
+  width: 58vw;
   height: 100%;
-  margin-left: -36.5vw;
+  margin-left: -58vw;
 `;
+const ControlsWrapper = styled.div`
+`;
+const ButtonPrev = styled.button`
+`;
+const ButtonNext = styled.button`
+`;
+class Steps extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      isSlid: false,
+    };
+    this.toggleSlide = this.toggleSlide.bind(this);
+  }
 
-const Steps = ({
-  hidden, number, text, videos,
-}) => {
-  const onClickPrev = () => {
-    const x = document.getElementsByClassName(`carousel-component ${number}`);
-    for (let i = 0; i < x.length; i += 1) {
-      x[i].classList.remove('slide-right');
-      x[i].classList.add('slide-left');
-    }
-  };
+  toggleSlide() {
+    const { isSlid } = this.state;
+    this.setState({
+      isSlid: !isSlid,
+    });
+  }
 
-  const onClickNext = () => {
-    const x = document.getElementsByClassName(`carousel-component ${number}`);
-    for (let i = 0; i < x.length; i += 1) {
-      x[i].classList.remove('slide-left');
-      x[i].classList.add('slide-right');
-    }
-  };
-
-  return (
-    <StepsIndividualWrapper>
-      <StepsListNumber>
-        {number}
-        .
-      </StepsListNumber>
-      <StepsListItem>
-        <StepsListText>
-          {text}
-        </StepsListText>
-
-        {videos.length === 1
-        && !hidden
-        && (
-        <VideoWrapper>
-            {videos.map((video) => <Videos video={video} />)}
-        </VideoWrapper>
-        )}
-        {videos.length === 2
-        && !hidden
-        && (
+  render() {
+    const {
+      hidden, number, text, videos,
+    } = this.props;
+    const { isSlid } = this.state;
+    return (
+      <StepsIndividualWrapper>
+        <StepsListNumber>
+          {number}
+          .
+        </StepsListNumber>
+        <StepsListItem>
+          <StepsListText>
+            {text}
+          </StepsListText>
+          {videos.length === 1
+          && !hidden
+          && (
           <VideoWrapper>
-            <CarouselWrapper>
-              <CarouselCover />
-              {videos.map((video) => <Videos video={video} stepNum={number} />)}
-              <CarouselCover />
-            </CarouselWrapper>
-            <div className="controls-wrapper">
-              <button type="button" className="button-prev" onClick={onClickPrev}>Previous</button>
-              <button type="button" className="button-next" onClick={onClickNext}>Next</button>
-              {/* <ol className="control-indicators-list">
-                <li className="control-indicators" />
-                <li className="control-indicators" />
-              </ol> */}
-            </div>
+              {videos.map((video) => <Videos video={video} />)}
           </VideoWrapper>
-        )}
-      </StepsListItem>
-    </StepsIndividualWrapper>
-  );
-};
+          )}
+          {videos.length === 2
+          && !hidden
+          && (
+            <VideoWrapper>
+              <CarouselWrapper>
+                <CarouselCover />
+                {videos.map((video) => <Videos video={video} isSlid={isSlid} />)}
+                <CarouselCover />
+              </CarouselWrapper>
+              <ControlsWrapper>
+                <ButtonPrev type="button" onClick={this.toggleSlide}>Previous</ButtonPrev>
+                <ButtonNext type="button" onClick={this.toggleSlide}>Next</ButtonNext>
+                {/* <ol className="control-indicators-list">
+                  <li className="control-indicators" />
+                  <li className="control-indicators" />
+                </ol> */}
+              </ControlsWrapper>
+            </VideoWrapper>
+          )}
+        </StepsListItem>
+      </StepsIndividualWrapper>
+    );
+  }
+}
 
 Steps.propTypes = {
   hidden: PropTypes.bool.isRequired,

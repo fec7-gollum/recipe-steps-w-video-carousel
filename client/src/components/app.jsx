@@ -6,9 +6,10 @@ import axios from 'axios';
 import styled from 'styled-components';
 import Steps from './steps.jsx';
 
+
 const AppWrap = styled.div`
-  margin: 5vh 40vw 5vh 20vw;
-  width: 40vw;
+  margin: 5vh 35vw 5vh 5vw;
+  width: 60vw;
   font-family: Graphik Web, Helvetica Neue, Helvetica, Roboto, Arial, Sans-Serif !important;
   line-height: 1.3;
   letter-spacing: 1px;

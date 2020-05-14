@@ -101,7 +101,7 @@ video {
 }
 
  */
-
+/*
  .slide-left {
   animation-name: slideleft;
   animation-duration: 0.25s;
@@ -117,10 +117,10 @@ video {
 }
 
  @keyframes slideleft {
-  100%{transform: translateX(-36.5vw)};
+  100%{transform: translateX(-58vw)};
 }
 
  @keyframes slideright {
-  0%{transform: translateX(-36.5vw)}
+  0%{transform: translateX(-58vw)}
   100%{transform: translateX(0vw)};
-}
+} */
