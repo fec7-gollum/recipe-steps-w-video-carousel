@@ -7,9 +7,20 @@ import Videos from './videos.jsx';
 const Steps = ({
   hidden, number, text, videos,
 }) => {
-  const onClick = () => {
-    // const x = document.getElementsByClass(`carousel-component ${number}`);
+  const onClickPrev = () => {
+    const x = document.getElementsByClassName(`carousel-component ${number}`);
+    for (let i = 0; i < x.length; i += 1) {
+      x[i].classList.remove('slide-right');
+      x[i].classList.add('slide-left');
+    }
+  };
 
+  const onClickNext = () => {
+    const x = document.getElementsByClassName(`carousel-component ${number}`);
+    for (let i = 0; i < x.length; i += 1) {
+      x[i].classList.remove('slide-left');
+      x[i].classList.add('slide-right');
+    }
   };
 
   return (
@@ -36,14 +47,12 @@ const Steps = ({
           <div className="videos-wrapper">
             <div className="carousel-wrapper">
               <div className="carousel-cover-left" />
-              <div className="slide">
-                {videos.map((video) => <Videos video={video} stepNum={number} />)}
-              </div>
+              {videos.map((video) => <Videos video={video} stepNum={number} />)}
               <div className="carousel-cover-right" />
             </div>
             <div className="controls-wrapper">
-              <button type="button" onClick={onClick()}>Previous</button>
-              <button type="button" onClick={onClick()}>Next</button>
+              <button type="button" onClick={onClickPrev}>Previous</button>
+              <button type="button" onClick={onClickNext}>Next</button>
               {/* <ol className="control-indicators-list">
                 <li className="control-indicators" />
                 <li className="control-indicators" />
