@@ -245,7 +245,7 @@ class App extends React.Component {
           </button>
         </div>
         <div id="steps-wrapper">
-          <ul id="steps-ol">
+          <ul id="steps-ul">
             {recipe.steps.map((step) => (
               <Steps
                 text={step.text}

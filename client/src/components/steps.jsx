@@ -51,8 +51,8 @@ const Steps = ({
               <div className="carousel-cover-right" />
             </div>
             <div className="controls-wrapper">
-              <button type="button" onClick={onClickPrev}>Previous</button>
-              <button type="button" onClick={onClickNext}>Next</button>
+              <button type="button" className="button-prev" onClick={onClickPrev}>Previous</button>
+              <button type="button" className="button-next" onClick={onClickNext}>Next</button>
               {/* <ol className="control-indicators-list">
                 <li className="control-indicators" />
                 <li className="control-indicators" />

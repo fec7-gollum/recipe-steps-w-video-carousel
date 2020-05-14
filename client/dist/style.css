@@ -1,12 +1,10 @@
+
 .app {
   margin: 5vh 40vw 5vh 20vw;
   width: 40vw;
   font-family: Graphik Web, Helvetica Neue, Helvetica, Roboto, Arial, Sans-Serif !important;
   line-height: 1.3;
   letter-spacing: 1px;
-}
-
-#steps-wrapper {
 }
 
 #steps-header {
@@ -16,10 +14,6 @@
 
 #steps-title {
   margin-left: 3vw;
-}
-
-#steps-hide-button {
-
 }
 
 .steps-list-number {
@@ -32,8 +26,8 @@
   margin-bottom: 1.5vh;
   border-bottom: 5px solid black;
 }
-.steps-list-item {
 
+.steps-list-item {
   word-wrap: break-word;
 }
 
@@ -41,7 +35,7 @@
   visibility: hidden;
 }
 
-ul {
+#steps-ul {
   list-style: none;
 }
 
