@@ -1,12 +1,10 @@
-.app {
+/*
+.app-wrap {
   margin: 5vh 40vw 5vh 20vw;
   width: 40vw;
   font-family: Graphik Web, Helvetica Neue, Helvetica, Roboto, Arial, Sans-Serif !important;
   line-height: 1.3;
   letter-spacing: 1px;
-}
-
-#steps-wrapper {
 }
 
 #steps-header {
@@ -16,10 +14,6 @@
 
 #steps-title {
   margin-left: 3vw;
-}
-
-#steps-hide-button {
-
 }
 
 .steps-list-number {
@@ -32,16 +26,13 @@
   margin-bottom: 1.5vh;
   border-bottom: 5px solid black;
 }
-.steps-list-item {
 
+.steps-list-item {
   word-wrap: break-word;
 }
 
-.hidden {
-  visibility: hidden;
-}
 
-ul {
+#steps-ul {
   list-style: none;
 }
 
@@ -73,16 +64,15 @@ video {
   grid-template-columns: 1fr 1fr 1fr 1fr;
 }
 
-.carousel-componet {
+.carousel-component {
   z-index: -1;
   width: 200%;
   height: 100%;
-  margin-left: -15vw !important;
 }
 
 .carousel-cover-right {
   z-index: 10;
-  background-color: red;
+  background-color: white;
   width: 36.5vw;
   height: 100%;
   margin-left: -36.5vw;
@@ -90,16 +80,47 @@ video {
 
 .carousel-cover-left {
   z-index: 10;
-  background-color: blue;
+  background-color:white;
   width: 36.5vw;
   height: 100%;
   margin-left: -36.5vw;
 }
- /*
-div #steps-wrapper
-ol  #steps-ol
-li .steps-list-item
 
-div .videos-wrapper
+.slide-left {
+  animation-name: slideleft;
+  animation-duration: 0.25s;
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
+}
 
-*/
+.slide-right {
+  animation-name: slideright;
+  animation-duration: 0.25s;
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
+}
+
+ */
+
+ .slide-left {
+  animation-name: slideleft;
+  animation-duration: 0.25s;
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
+}
+
+.slide-right {
+  animation-name: slideright;
+  animation-duration: 0.25s;
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
+}
+
+ @keyframes slideleft {
+  100%{transform: translateX(-36.5vw)};
+}
+
+ @keyframes slideright {
+  0%{transform: translateX(-36.5vw)}
+  100%{transform: translateX(0vw)};
+}

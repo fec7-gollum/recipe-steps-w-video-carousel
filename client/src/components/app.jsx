@@ -3,7 +3,46 @@
 
 import React from 'react';
 import axios from 'axios';
+import styled from 'styled-components';
 import Steps from './steps.jsx';
+
+const AppWrap = styled.div`
+  margin: 5vh 40vw 5vh 20vw;
+  width: 40vw;
+  font-family: Graphik Web, Helvetica Neue, Helvetica, Roboto, Arial, Sans-Serif !important;
+  line-height: 1.3;
+  letter-spacing: 1px;
+`;
+
+const StepsHeader = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
+
+const StepsTitle = styled.h3`
+  margin-left: 3vw;
+`;
+
+const StepsHideButton = styled.button`
+  & {
+    background: none!important;
+    border: none;
+    padding: 0 !important;
+    text-decoration: underline;
+    cursor: pointer;
+  }
+  &:focus {
+    outline: 0;
+  }
+`;
+
+const StepsWraper = styled.div`
+`;
+
+const StepsUl = styled.ul`
+  list-style: none;
+`;
+
 
 const nonRandomRecipe = {
   id: 1,
@@ -172,7 +211,7 @@ class App extends React.Component {
 
   componentDidMount() {
     const { recipeId } = this.state;
-    axios.get(`http//localhost:3003/api/steps${recipeId}`)
+    axios.get(`/api/steps${recipeId}`)
       .then((res) => {
         this.setState({
           recipe: res.data,
@@ -182,7 +221,7 @@ class App extends React.Component {
         console.log(err);
       });
 
-    axios.get(`http//localhost:3003//api/videos${recipeId}`)
+    axios.get(`/api/videos${recipeId}`)
       .then((res) => {
         this.setState({
           videos: res.data,
@@ -235,17 +274,17 @@ class App extends React.Component {
       recipe, hidden,
     } = this.state;
     return (
-      <div className="app">
-        <div id="steps-header">
-          <h3 id="steps-title">
+      <AppWrap>
+        <StepsHeader>
+          <StepsTitle>
             Steps
-          </h3>
-          <button id="steps-hide-button" onClick={this.toggleHidden} type="button">
+          </StepsTitle>
+          <StepsHideButton onClick={this.toggleHidden} type="button">
             Hide All Images
-          </button>
-        </div>
-        <div id="steps-wrapper">
-          <ul id="steps-ol">
+          </StepsHideButton>
+        </StepsHeader>
+        <StepsWraper>
+          <StepsUl>
             {recipe.steps.map((step) => (
               <Steps
                 text={step.text}
@@ -254,9 +293,9 @@ class App extends React.Component {
                 number={step.number}
               />
             ))}
-          </ul>
-        </div>
-      </div>
+          </StepsUl>
+        </StepsWraper>
+      </AppWrap>
     );
   }
 }
