@@ -212,7 +212,7 @@ class App extends React.Component {
 
   componentDidMount() {
     const { recipeId } = this.state;
-    axios.get(`/api/steps${recipeId}`)
+    axios.get(`http://localhost:3003/api/steps${recipeId}`)
       .then((res) => {
         this.setState({
           recipe: res.data,
@@ -222,7 +222,7 @@ class App extends React.Component {
         console.log(err);
       });
 
-    axios.get(`/api/videos${recipeId}`)
+    axios.get(`http://localhost:3003/api/videos${recipeId}`)
       .then((res) => {
         this.setState({
           videos: res.data,
