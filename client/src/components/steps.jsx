@@ -36,10 +36,32 @@ const CarouselCover = styled.div`
   margin-left: -58vw;
 `;
 const ControlsWrapper = styled.div`
+  dispaly: flex;
+  justify-content: flex-end;
 `;
 const ButtonPrev = styled.button`
+& {
+  background: none!important;
+  border: none;
+  padding: 0 !important;
+  text-decoration: underline;
+  cursor: pointer;
+}
+&:focus {
+  outline: 0;
+}
 `;
 const ButtonNext = styled.button`
+& {
+  background: none!important;
+  border: none;
+  padding: 0 !important;
+  text-decoration: underline;
+  cursor: pointer;
+}
+&:focus {
+  outline: 0;
+}
 `;
 class Steps extends React.Component {
   constructor(props) {
@@ -89,8 +111,8 @@ class Steps extends React.Component {
                 <CarouselCover />
               </CarouselWrapper>
               <ControlsWrapper>
-                <ButtonPrev type="button" onClick={this.toggleSlide}>Previous</ButtonPrev>
-                <ButtonNext type="button" onClick={this.toggleSlide}>Next</ButtonNext>
+                <ButtonPrev type="button" onClick={this.toggleSlide}> &larr; Previous </ButtonPrev>
+                <ButtonNext type="button" onClick={this.toggleSlide}> Next &rarr; </ButtonNext>
                 {/* <ol className="control-indicators-list">
                   <li className="control-indicators" />
                   <li className="control-indicators" />
