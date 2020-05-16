@@ -36,32 +36,120 @@ const CarouselCover = styled.div`
   margin-left: -58vw;
 `;
 const ControlsWrapper = styled.div`
+  display: grid;
+  grid-template-columns: 70% 15% 15%;
 `;
+
 const ButtonPrev = styled.button`
+& {
+  background: none!important;
+  border: none;
+  padding: 0 !important;
+  cursor: pointer;
+  grid-column: 2 / 3;
+  text-align: right;
+  font-size: 0.8em;
+  text-transform: uppercase;
+}
+&:focus {
+  outline: 0;
+}
 `;
 const ButtonNext = styled.button`
+& {
+  background: none!important;
+  border: none;
+  padding: 0 !important;
+  cursor: pointer;
+  grid-column: 3 / 4;
+  text-align: right;
+  font-size: 0.8em;
+  text-transform: uppercase;
+}
+&:focus {
+  outline: 0;
+}
 `;
+
+const IndicatorsWrapper = styled.ol`
+  grid-column: 1 / 4;
+  display: flex;
+  justify-content: center;
+  list-style: none;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+`;
+
+const IndicatorNext = styled.li`
+& {
+  cursor: pointer;
+  height: 5px;
+  width: 5px;
+  margin: 0 5px;
+  background-color: ${(props) => (props.nextActive ? '#bbb' : '#717171')};
+  border-radius: 100%;
+  display: inline-block;
+  transition: transform 0.6s ease;
+} &:active {
+  background-color: #717171;
+} &:hover {
+  background-color: #717171;
+} &:focus {
+  outline: 0;
+}
+`;
+
+const IndicatorPrev = styled.li`
+& {
+  cursor: pointer;
+  height: 5px;
+  width: 5px;
+  margin: 0 5px;
+  background-color: ${(props) => (props.prevActive ? '#bbb' : '#717171')};
+  border-radius: 100%;
+  display: inline-block;
+  transition: transform 0.6s ease;
+} &:active {
+  background-color: #717171;
+} &:hover {
+  background-color: #717171;
+} &:focus {
+  outline: 0;
+}
+`;
+
 class Steps extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       isSlid: false,
+      nextActive: true,
+      prevActive: false,
     };
     this.toggleSlide = this.toggleSlide.bind(this);
   }
 
   toggleSlide() {
-    const { isSlid } = this.state;
+    const {
+      isSlid, nextActive, prevActive,
+    } = this.state;
     this.setState({
       isSlid: !isSlid,
-    });
+    }, this.setState({
+      nextActive: !nextActive,
+    }, this.setState({
+      prevActive: !prevActive,
+    })));
   }
 
   render() {
     const {
       hidden, number, text, videos,
     } = this.props;
-    const { isSlid } = this.state;
+    const {
+      isSlid, nextActive, prevActive,
+    } = this.state;
     return (
       <StepsIndividualWrapper>
         <StepsListNumber>
@@ -89,12 +177,12 @@ class Steps extends React.Component {
                 <CarouselCover />
               </CarouselWrapper>
               <ControlsWrapper>
-                <ButtonPrev type="button" onClick={this.toggleSlide}>Previous</ButtonPrev>
-                <ButtonNext type="button" onClick={this.toggleSlide}>Next</ButtonNext>
-                {/* <ol className="control-indicators-list">
-                  <li className="control-indicators" />
-                  <li className="control-indicators" />
-                </ol> */}
+                <ButtonPrev type="button" onClick={this.toggleSlide} disabled={!prevActive}> &larr; Previous </ButtonPrev>
+                <ButtonNext type="button" onClick={this.toggleSlide} disabled={!nextActive}> Next &rarr; </ButtonNext>
+                <IndicatorsWrapper>
+                  <IndicatorPrev onClick={this.toggleSlide} prevActive={prevActive} />
+                  <IndicatorNext onClick={this.toggleSlide} nextActive={nextActive} />
+                </IndicatorsWrapper>
               </ControlsWrapper>
             </VideoWrapper>
           )}
