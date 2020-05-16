@@ -36,16 +36,20 @@ const CarouselCover = styled.div`
   margin-left: -58vw;
 `;
 const ControlsWrapper = styled.div`
-  dispaly: flex;
-  justify-content: flex-end;
+  display: grid;
+  grid-template-columns: 70% 15% 15%;
 `;
+
 const ButtonPrev = styled.button`
 & {
   background: none!important;
   border: none;
   padding: 0 !important;
-  text-decoration: underline;
   cursor: pointer;
+  grid-column: 2 / 3;
+  text-align: right;
+  font-size: 0.8em;
+  text-transform: uppercase;
 }
 &:focus {
   outline: 0;
@@ -56,27 +60,68 @@ const ButtonNext = styled.button`
   background: none!important;
   border: none;
   padding: 0 !important;
-  text-decoration: underline;
   cursor: pointer;
+  grid-column: 3 / 4;
+  text-align: right;
+  font-size: 0.8em;
+  text-transform: uppercase;
 }
 &:focus {
   outline: 0;
 }
 `;
+
+const IndicatorsWrapper = styled.ol`
+  grid-column: 1 / 4;
+  display: flex;
+  justify-content: center;
+  list-style: none;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+`;
+
+const Indicators = styled.li`
+& {
+  cursor: pointer;
+  height: 5px;
+  width: 5px;
+  margin: 0 5px;
+  background-color: #bbb;
+  border-radius: 100%;
+  display: inline-block;
+  transition: background-color 0.6s ease;
+} &:active {
+  background-color: #717171;
+} &:hover {
+  background-color: #717171;
+} &:focus {
+  outline: 0;
+}
+`;
+
 class Steps extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       isSlid: false,
+      nextActive: true,
+      prevActive: false,
     };
     this.toggleSlide = this.toggleSlide.bind(this);
   }
 
   toggleSlide() {
-    const { isSlid } = this.state;
+    const {
+      isSlid, nextActive, prevActive,
+    } = this.state;
     this.setState({
       isSlid: !isSlid,
-    });
+    }, this.setState({
+      nextActive: !nextActive,
+    }, this.setState({
+      prevActive: !prevActive,
+    })));
   }
 
   render() {
@@ -113,10 +158,10 @@ class Steps extends React.Component {
               <ControlsWrapper>
                 <ButtonPrev type="button" onClick={this.toggleSlide}> &larr; Previous </ButtonPrev>
                 <ButtonNext type="button" onClick={this.toggleSlide}> Next &rarr; </ButtonNext>
-                {/* <ol className="control-indicators-list">
-                  <li className="control-indicators" />
-                  <li className="control-indicators" />
-                </ol> */}
+                <IndicatorsWrapper>
+                  <Indicators onClick={this.toggleSlide} />
+                  <Indicators onClick={this.toggleSlide} />
+                </IndicatorsWrapper>
               </ControlsWrapper>
             </VideoWrapper>
           )}
