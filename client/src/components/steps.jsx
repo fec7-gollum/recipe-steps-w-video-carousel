@@ -81,16 +81,35 @@ const IndicatorsWrapper = styled.ol`
   margin: 0;
 `;
 
-const Indicators = styled.li`
+const IndicatorNext = styled.li`
 & {
   cursor: pointer;
   height: 5px;
   width: 5px;
   margin: 0 5px;
-  background-color: #bbb;
+  background-color: ${(props) => (props.nextActive ? '#bbb' : '#717171')};
   border-radius: 100%;
   display: inline-block;
-  transition: background-color 0.6s ease;
+  transition: transform 0.6s ease;
+} &:active {
+  background-color: #717171;
+} &:hover {
+  background-color: #717171;
+} &:focus {
+  outline: 0;
+}
+`;
+
+const IndicatorPrev = styled.li`
+& {
+  cursor: pointer;
+  height: 5px;
+  width: 5px;
+  margin: 0 5px;
+  background-color: ${(props) => (props.prevActive ? '#bbb' : '#717171')};
+  border-radius: 100%;
+  display: inline-block;
+  transition: transform 0.6s ease;
 } &:active {
   background-color: #717171;
 } &:hover {
@@ -128,7 +147,9 @@ class Steps extends React.Component {
     const {
       hidden, number, text, videos,
     } = this.props;
-    const { isSlid } = this.state;
+    const {
+      isSlid, nextActive, prevActive,
+    } = this.state;
     return (
       <StepsIndividualWrapper>
         <StepsListNumber>
@@ -156,11 +177,11 @@ class Steps extends React.Component {
                 <CarouselCover />
               </CarouselWrapper>
               <ControlsWrapper>
-                <ButtonPrev type="button" onClick={this.toggleSlide}> &larr; Previous </ButtonPrev>
-                <ButtonNext type="button" onClick={this.toggleSlide}> Next &rarr; </ButtonNext>
+                <ButtonPrev type="button" onClick={this.toggleSlide} disabled={!prevActive}> &larr; Previous </ButtonPrev>
+                <ButtonNext type="button" onClick={this.toggleSlide} disabled={!nextActive}> Next &rarr; </ButtonNext>
                 <IndicatorsWrapper>
-                  <Indicators onClick={this.toggleSlide} />
-                  <Indicators onClick={this.toggleSlide} />
+                  <IndicatorPrev onClick={this.toggleSlide} prevActive={prevActive} />
+                  <IndicatorNext onClick={this.toggleSlide} nextActive={nextActive} />
                 </IndicatorsWrapper>
               </ControlsWrapper>
             </VideoWrapper>
